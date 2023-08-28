@@ -9,6 +9,11 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sudhakarbastawade2303/spring-boot-war-example.git']])
             }
         }
+	stage('Sonar stage') {
+            steps {
+                echo "running sonar scan"
+		}
+        }
         stage('build') {
             steps {
                 sh 'mvn clean install'
@@ -16,7 +21,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-               deploy adapters: [tomcat9(credentialsId: 'Tomcat9-server', path: '', url: 'http://13.235.75.178:8080')], contextPath: '/app', war: '**/*.war'
+               deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://65.1.1.251:8080')], contextPath: '/app', war: '**/*.war'
             }
         }    
     }
