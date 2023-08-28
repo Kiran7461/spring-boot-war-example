@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'MAVEN_HOME'
+        Maven 'MAVEN_HOME'
     }
     stages {
         stage('SCM checkout') {
